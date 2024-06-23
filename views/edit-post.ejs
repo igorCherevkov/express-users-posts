@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование поста</title>
+</head>
+<body>
+    <h1>Редактирование поста</h1>
+    <form action="/profile/edit-post/<%= post.id %>" method="POST">
+        <label for="title">Заголовок:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="content">Содержание:</label><br>
+        <textarea id="content" name="content"></textarea><br>
+        <button type="submit">Обновить пост</button>
+    </form>
+    <a href="/profile">Назад в профиль</a>
+</body>
+</html>

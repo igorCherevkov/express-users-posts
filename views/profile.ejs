@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+</head>
+<body>
+    <h1>Мой профиль</h1>
+    <h2>Имя пользователя: <%= user.username %></h2>
+
+    <% if (posts.length > 0) { %>
+        <h3>Мои посты</h3>
+        <div>
+            <span>Sort by: </span>
+            <a href="/profile?sortBy=createdAt&order=ASC">по дате по возрастанию</a> |
+            <a href="/profile?sortBy=createdAt&order=DESC">по дате по убыванию</a> |
+            <a href="/profile?sortBy=title&order=ASC">по названию по возрастанию</a> |
+            <a href="/profile?sortBy=title&order=DESC">по названию по убыванию</a>
+        </div>
+        <ul>
+            <% posts.forEach(post => { %>
+                <li>
+                    <strong><%= post.title %></strong>: <%= post.content %>
+                </li>
+                <a href="/profile/edit-post/<%= post.id %>">Edit</a>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>У вас пока нет постов.</p>
+    <% } %>
+
+    <h3>Создать новый пост</h3>
+    <form action="/create-post" method="POST">
+        <label for="title">Заголовок:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="content">Содержание:</label><br>
+        <textarea id="content" name="content"></textarea><br>
+        <button type="submit">Создать пост</button>
+    </form>
+    
+    <a href="/">Вернуться к списку пользователей</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+    <div>
+        <h1>Список пользователей и их посты</h1>
+        <% if (isAuth) { %>
+            <a href="/logout"><button>Выйти</button></a>
+            <a href="/profile"><button>Профиль</button></a>
+        <% } else { %>
+            <a href="/login"><button>Войти</button></a>
+            <a href="/register"><button>Регистрация</button></a>
+        <% } %>
+    </div>
+    <div>
+        <span>Сортировать по: </span>
+        <a href="/?sortBy=username&order=ASC">по возрастанию</a> |
+        <a href="/?sortBy=username&order=DESC">по убыванию</a>
+    </div>
+    <div>
+        <% users.forEach(user => { %>
+            <h2><%= user.username %>:</h2>
+            <% if (user.posts && user.posts.length > 0) { %>
+                <ul>
+                    <% user.posts.forEach(post => { %>
+                        <li><%= post.title %>: <%= post.content %></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>У пользователя <%= user.username %> нет постов.</p>
+            <% } %>
+        <% }); %>
+    </div>
+</body>
+</html>
